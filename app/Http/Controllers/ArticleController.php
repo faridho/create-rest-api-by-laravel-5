@@ -31,5 +31,66 @@ class ArticleController extends Controller
             ]);
         }
     }
-
+	
+	public function store(Request $request){
+		$article = Article::create([
+			'title' => $request->input('title'),
+			'body'  => $request->input('body')
+		]);
+		
+		if(!$article){
+			return response()->json([
+				'Error'   => false,
+				'Message' => 'Success' 
+			]);
+		}else{
+			return response()->json([
+				'Error'   => false,
+				'Message' => 'Failed' 
+			]);
+		}
+	}
+	
+	public function update(Request $request, $id){
+		$cek     = Article::find($id);
+		if(!$cek){
+			return response()->json([
+                'Error'   => true,
+                "Message" => "Not Found"
+            ]);
+		}else{
+			$article = Article::find($id)->update([
+				'title' => $request->input('title'),
+				'body'  => $request->input('body')
+			]);
+			
+			if(!$article){
+				return response()->json([
+					'Error'   => false,
+					'Message' => 'Success' 
+				]);
+			}else{
+				return response()->json([
+					'Error'   => false,
+					'Message' => 'Failed' 
+				]);
+			}
+		}
+	}
+	
+	public function destroy($id){
+		$cek = Article::find($id);
+		if(!$cek){
+			return response()->json([
+                'Error'   => true,
+                "Message" => "Not Found"
+            ]);
+		}else{
+			Article::delete($id);
+			return response()->json([
+				'Error'   => false,
+				'Message' => 'Success' 
+			]);
+		}
+	}
 }
