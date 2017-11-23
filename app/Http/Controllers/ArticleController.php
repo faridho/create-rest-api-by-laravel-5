@@ -41,12 +41,12 @@ class ArticleController extends Controller
 		if(!$article){
 			return response()->json([
 				'Error'   => false,
-				'Message' => 'Success' 
+				'Message' => 'Failed' 
 			]);
 		}else{
 			return response()->json([
 				'Error'   => false,
-				'Message' => 'Failed' 
+				'Message' => 'Success' 
 			]);
 		}
 	}
@@ -67,12 +67,12 @@ class ArticleController extends Controller
 			if(!$article){
 				return response()->json([
 					'Error'   => false,
-					'Message' => 'Success' 
+					'Message' => 'Failed' 
 				]);
 			}else{
 				return response()->json([
 					'Error'   => false,
-					'Message' => 'Failed' 
+					'Message' => 'Success' 
 				]);
 			}
 		}
@@ -86,7 +86,7 @@ class ArticleController extends Controller
                 "Message" => "Not Found"
             ]);
 		}else{
-			Article::delete($id);
+			Article::find($id)->delete();
 			return response()->json([
 				'Error'   => false,
 				'Message' => 'Success' 
